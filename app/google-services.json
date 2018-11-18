@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "716617552136",
+    "firebase_url": "https://bijb-mobile-b1da3.firebaseio.com",
+    "project_id": "bijb-mobile-b1da3",
+    "storage_bucket": "bijb-mobile-b1da3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716617552136:android:d1ec6d2c2f26a971",
+        "android_client_info": {
+          "package_name": "com.volunteam.mobilebijb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716617552136-l96615thtbbb80tig0shs7t8cp8ne6l1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYKlXriQQfb5OK5PoZhkAU5n8hrB6qNX0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

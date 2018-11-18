@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include
+        android:id="@+id/toolbar_add_flight2"
+        layout="@layout/toolbar_menu" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar_add_flight2"
+        android:orientation="vertical"
+        android:padding="16dp">
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/txinput_kode_flight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <EditText
+                    android:id="@+id/edt_kode_flight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#6b000000"
+                    android:textColor="#000"
+                    android:singleLine="true"
+                    android:backgroundTint="#6b000000"
+                    android:inputType="text"
+                    android:hint="Kode Penerbangan"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/txinput_ktp_flight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <EditText
+                    android:id="@+id/edt_ktp_flight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#6b000000"
+                    android:textColor="#000"
+                    android:singleLine="true"
+                    android:backgroundTint="#6b000000"
+                    android:inputType="textEmailAddress"
+                    android:hint="No. KTP"/>
+            </android.support.design.widget.TextInputLayout>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Already Check In"
+                android:id="@+id/check_checkin"/>
+            <Button
+                android:id="@+id/btn_add_flight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add Flight"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button_background"
+                android:textColor="#fff"/>
+    </LinearLayout>
+    <include
+        layout="@layout/progress_loading"/>
+</RelativeLayout>

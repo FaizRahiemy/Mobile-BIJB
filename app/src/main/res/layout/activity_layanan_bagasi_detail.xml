@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_detail_bagasi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient_dark_blue"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@color/white"
+        app:navigationIcon="@drawable/ic_back" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Layanan Bagasi"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:layout_width="131dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="27dp"
+
+                android:textAlignment="center"
+                android:text="Kode Bagasi Anda"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:lineSpacingExtra="-1sp"
+                />
+
+            <ImageView
+                android:id="@+id/img_barcode_bike"
+
+                android:layout_gravity="center_horizontal"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp"
+
+                android:background="#c4c4c4"
+                />
+
+            <TextView
+                android:id="@+id/txt_kode_bagasi"
+
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+
+                android:textSize="16sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:lineSpacingExtra="4sp"
+                android:text="Kode Bagasi"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="34dp"
+                android:layout_marginLeft="30dp"
+
+                android:textSize="16sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:lineSpacingExtra="4sp"
+                android:text="Status"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/bagasi_jemput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="25dp"
+                        android:layout_height="25dp">
+
+                        <View
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/blue_circle"
+                            />
+
+                        <View
+                            android:layout_width="15dp"
+                            android:layout_height="11.66dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+
+                            android:background="@drawable/ic_checklist_baggage"
+                            />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+
+                        android:textSize="16sp"
+                        android:fontFamily="sans-serif"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:lineSpacingExtra="4sp"
+                        android:text="Menjemput bagasi anda"/>
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/bagasi_perjalanan_progress"
+                    android:layout_width="4dp"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="-2dp"
+                    android:layout_marginLeft="40dp"
+
+                    android:background="@drawable/blue_rectangle"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/bagasi_perjalanan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-2dp"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="25dp"
+                        android:layout_height="25dp">
+
+                        <View
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/blue_circle"
+                            />
+
+                        <View
+                            android:layout_width="15dp"
+                            android:layout_height="11.66dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+
+                            android:background="@drawable/ic_checklist_baggage"
+                            />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+
+                        android:textSize="16sp"
+                        android:fontFamily="sans-serif"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:lineSpacingExtra="4sp"
+                        android:text="Dalam Perjalanan ke Bandara"/>
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/bagasi_maskapai_progress"
+                    android:layout_width="4dp"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="-2dp"
+                    android:layout_marginLeft="40dp"
+
+                    android:background="@drawable/blue_rectangle"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/bagasi_maskapai"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-2dp"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="25dp"
+                        android:layout_height="25dp">
+
+                        <View
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/blue_circle"
+                            />
+
+                        <View
+                            android:layout_width="15dp"
+                            android:layout_height="11.66dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+
+                            android:background="@drawable/ic_checklist_baggage"
+                            />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+
+                        android:textSize="16sp"
+                        android:fontFamily="sans-serif"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:lineSpacingExtra="4sp"
+                        android:text="Check-in"/>
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/bagasi_makeup_progress"
+                    android:layout_width="4dp"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="-2dp"
+                    android:layout_marginLeft="40dp"
+
+                    android:background="@drawable/blue_rectangle"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/bagasi_makeup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-2dp"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="25dp"
+                        android:layout_height="25dp">
+
+                        <View
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/blue_circle"
+                            />
+
+                        <View
+                            android:layout_width="15dp"
+                            android:layout_height="11.66dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+
+                            android:background="@drawable/ic_checklist_baggage"
+                            />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+
+                        android:textSize="16sp"
+                        android:fontFamily="sans-serif"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:lineSpacingExtra="4sp"
+                        android:text="Make up area"/>
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/bagasi_plane_progress"
+                    android:layout_width="4dp"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="-2dp"
+                    android:layout_marginLeft="40dp"
+
+                    android:background="@drawable/blue_rectangle"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/bagasi_plane"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-2dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginBottom="30px"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="25dp"
+                        android:layout_height="25dp">
+
+                        <View
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:background="@drawable/blue_circle"
+                            />
+
+                        <View
+                            android:layout_width="15dp"
+                            android:layout_height="11.66dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+
+                            android:background="@drawable/ic_checklist_baggage"
+                            />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+
+                        android:textSize="16sp"
+                        android:fontFamily="sans-serif"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:lineSpacingExtra="4sp"
+                        android:text="Sudah berada di pesawat"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+</LinearLayout>

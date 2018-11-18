@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/group1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/flight_info"
+            android:title="Flight Info"
+            android:icon="@drawable/ic_flight_info" />
+        <item
+            android:id="@+id/baggage_track"
+            android:title="Baggage Track"
+            android:icon="@drawable/ic_baggage"/>
+        <item
+            android:id="@+id/my_flight"
+            android:title="My Flight"
+            android:icon="@drawable/ic_flight_info"/>
+        <item
+            android:id="@+id/book_ticket"
+            android:title="Book Ticket"
+            android:icon="@drawable/ic_ticket"/>
+        <item
+            android:id="@+id/book_parking"
+            android:title="Book Parking"
+            android:icon="@drawable/ic_parking"/>
+    </group>
+    <group android:id="@+id/group2"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/buy_souvenier"
+            android:title="Buy Souvenier"
+            android:icon="@drawable/ic_souvenier"/>
+        <item
+            android:id="@+id/airport_bike"
+            android:title="Airport Bike"
+            android:icon="@drawable/ic_scooter"/>
+        <item
+            android:id="@+id/entertainment_news"
+            android:title="Entertainment &amp; News"
+            android:icon="@drawable/ic_entertainment"/>
+        <item
+            android:id="@+id/traveling"
+            android:title="Traveling"
+            android:icon="@drawable/ic_route" />
+    </group>
+    <group android:id="@+id/group3"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/customer_service"
+            android:title="Customer Service"
+            android:icon="@drawable/ic_chat"/>
+        <item
+            android:id="@+id/about"
+            android:title="About"/>
+    </group>
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/ic_logout"
+        android:title="Logout"/>
+</menu>

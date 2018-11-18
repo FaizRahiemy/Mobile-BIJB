@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp">
+
+    <ImageView
+        android:id="@+id/img_product"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/gray"/>
+
+    <TextView
+        android:id="@+id/txt_name_product"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="nama produk"
+        android:layout_marginTop="10dp"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/txt_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp 765.000"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginTop="5dp"
+        android:textSize="16sp"/>
+
+</LinearLayout>

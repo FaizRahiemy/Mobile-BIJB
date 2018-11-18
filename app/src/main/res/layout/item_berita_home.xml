@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp">
+    <ImageView
+        android:id="@+id/img_berita"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:background="@color/gray"
+        android:layout_marginStart="20dp"/>
+    <TextView
+        android:id="@+id/txt_berita"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginStart="20dp"/>
+</LinearLayout>
