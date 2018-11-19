@@ -22,6 +22,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -111,6 +112,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private String token = "";
     private String id = "";
 
+    private Menu myMenu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,7 +136,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         homePresenter.getBerita("id",apiKeyNews);
         setBroadcast();
         displayFirebaseRegId();
-        tinyDB = new TinyDB(this);
         token = tinyDB.getString("token");
         id = tinyDB.getString("id");
         if (id!="" && token!=""){
@@ -176,6 +178,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         nav_view = findViewById(R.id.nav_view);
         home_layout = findViewById(R.id.home_layout);
         nav_view.setNavigationItemSelectedListener(this);
+        myMenu = nav_view.getMenu();
         txProfile = (TextView)findViewById(R.id.tx_profile);
         View headerView = nav_view.getHeaderView(0);
         ImageView imgProfile = (ImageView) headerView.findViewById(R.id.img_profile);
@@ -184,6 +187,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         txProfile.setText("Login");
         imgProfile.setOnClickListener(this);
         txProfile.setOnClickListener(this);
+
+        try{
+            if (tinyDB.getString("id").equals("")) {
+                myMenu.findItem(R.id.logout).setVisible(false);
+            }else{
+                myMenu.findItem(R.id.logout).setVisible(true);
+            }
+        }catch(Exception e){
+            myMenu.findItem(R.id.logout).setVisible(false);
+        }
     }
 
     private void setToolbar(Toolbar toolbar){
@@ -394,7 +407,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(HomeActivity.this, MerchandiseActivity.class));
                 break;
             case R.id.img_profile:
-                tinyDB = new TinyDB(this);
                 try {
                     token = tinyDB.getString("token");
                     id = tinyDB.getString("id");
