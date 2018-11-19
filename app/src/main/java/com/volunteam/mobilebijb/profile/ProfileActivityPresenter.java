@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.common.hash.Hashing;
 import com.volunteam.mobilebijb.config.api.API;
 import com.volunteam.mobilebijb.config.api.MainAPIHelper;
 import com.volunteam.mobilebijb.home.HomeActivity;
@@ -12,6 +13,7 @@ import com.volunteam.mobilebijb.login.LoginResponse;
 import com.volunteam.mobilebijb.register.InsertResponse;
 
 import java.net.SocketTimeoutException;
+import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -71,10 +73,26 @@ public class ProfileActivityPresenter {
 
     public void updateUser(final User userParam){
         view.showProgressBar();
+        String passwordHash = "";
+        String pinHash = "";
         if (userParam.getNama().equals("")){userParam.setNama(user.getNama());}
         if (userParam.getEmail().equals("")){userParam.setEmail(user.getEmail());}
-        if (userParam.getPassword().equals("")){userParam.setPassword(user.getPassword());}
-        if (userParam.getPin().equals("")){userParam.setPin(user.getPin());}
+        if (userParam.getPassword().equals("")){
+            userParam.setPassword(user.getPassword());
+        }else{
+		    passwordHash = Hashing.sha256()
+                .hashString(userParam.getPassword().toString(), StandardCharsets.UTF_8)
+                .toString();
+                userParam.setPassword(passwordHash);
+        }
+        if (userParam.getPin().equals("")){
+            userParam.setPin(user.getPin());
+        }else{
+            pinHash = Hashing.sha256()
+                .hashString(userParam.getPin().toString(), StandardCharsets.UTF_8)
+                .toString();
+                userParam.setPin(pinHash);
+        }
         API api = MainAPIHelper.getClient(user.getToken()).create(API.class);
         Call<InsertResponse> call = api.updateUser(
                 user.getId(),userParam.getNama(),userParam.getEmail(),userParam.getPassword(),
