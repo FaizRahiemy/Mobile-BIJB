@@ -191,11 +191,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         try{
             if (tinyDB.getString("id").equals("")) {
                 myMenu.findItem(R.id.logout).setVisible(false);
+                myMenu.findItem(R.id.baggage_track).setVisible(false);
+                myMenu.findItem(R.id.my_flight).setVisible(false);
             }else{
                 myMenu.findItem(R.id.logout).setVisible(true);
             }
         }catch(Exception e){
             myMenu.findItem(R.id.logout).setVisible(false);
+            myMenu.findItem(R.id.baggage_track).setVisible(false);
+            myMenu.findItem(R.id.my_flight).setVisible(false);
         }
     }
 
