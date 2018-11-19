@@ -319,7 +319,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.logout:
                 tinyDB.remove("id");
                 tinyDB.remove("token");
-                startActivity(new Intent(HomeActivity.this,LoginActivity.class));
+                startActivity(new Intent(HomeActivity.this,HomeActivity.class));
                 finish();
                 break;
         }

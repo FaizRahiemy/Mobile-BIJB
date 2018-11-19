@@ -64,6 +64,8 @@ public class TravelAdapter extends RecyclerView.Adapter<TravelAdapter.HolderData
             holder.layoutSK.setVisibility(View.GONE);
         }
         holder.id = Integer.valueOf(travel.getId());
+
+        holder.txTempat.setText(travelList.get(position).getAddress());
     }
 
     @Override

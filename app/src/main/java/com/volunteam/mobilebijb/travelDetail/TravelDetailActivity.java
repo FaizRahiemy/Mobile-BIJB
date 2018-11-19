@@ -116,7 +116,7 @@ public class TravelDetailActivity extends AppCompatActivity implements DetailTra
     @Override
     public void showTravelDetail(ResultTravelDetail travelDetail) {
         //TODO settile according to travel name
-        getSupportActionBar().setTitle(travelDetail.getNama());
+        collapsingToolbarLayout.setTitle(travelDetail.getNama());
         if (travelDetail.getImage().isEmpty()) {
             imgHeader.setImageResource(R.color.colorPrimaryDark);
         } else {
@@ -127,6 +127,7 @@ public class TravelDetailActivity extends AppCompatActivity implements DetailTra
                     .into(imgHeader);
         }
         adapterKomentar.notifyDataSetChanged();
+        txDesc.setText(travelDetail.description);
     }
 
     @Override
