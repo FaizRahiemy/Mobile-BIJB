@@ -14,9 +14,12 @@ import java.util.List;
 public class KursiAdapter extends RecyclerView.Adapter<KursiAdapter.HolderData> {
 
     private List<RowKursi> kursiList;
+    private int num;
+    private int pick = 0;
 
-    public KursiAdapter(List<RowKursi> kursiList) {
+    public KursiAdapter(List<RowKursi> kursiList, int num) {
         this.kursiList = kursiList;
+        this.num = num;
     }
 
     @NonNull
@@ -107,9 +110,12 @@ public class KursiAdapter extends RecyclerView.Adapter<KursiAdapter.HolderData> 
     }
 
     private void checkKursi(Kursi kursi, TextView tx1, TextView tx2, String column){
-        if (kursi.getColumn().equals(column)){
-            if (kursi.getStatus().equals("0")){
-                switchStatus(tx1,tx2);
+        if (pick<num) {
+            if (kursi.getColumn().equals(column)) {
+                if (kursi.getStatus().equals("0")) {
+                    switchStatus(tx1, tx2);
+                    pick = pick + 1;
+                }
             }
         }
     }
