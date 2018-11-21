@@ -15,9 +15,9 @@ public class Penumpang {
     }
 
     public Penumpang() {
-        nama = "";
-        noKTP = "";
-        kategori = "";
+        nama = "Iqbal";
+        noKTP = "3201890929293";
+        kategori = "Dewasa";
         imgKtp = "";
     }
 

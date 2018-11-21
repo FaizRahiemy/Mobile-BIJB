@@ -32,7 +32,8 @@ public class MyFlightAdapter extends RecyclerView.Adapter<MyFlightAdapter.Holder
     public void onBindViewHolder(@NonNull HolderData holderData, int i) {
         MyFlight myFlight = myFlightList.get(i);
         holderData.idFlight = myFlight.getId();
-        holderData.myFlight = myFlightList.get(i);
+        holderData.myFlight = myFlight;
+        holderData.num = myFlight.getPenumpangList().size();
     }
 
     @Override
@@ -48,6 +49,7 @@ public class MyFlightAdapter extends RecyclerView.Adapter<MyFlightAdapter.Holder
         public TextView txStatus1, txStatus2, txStatus3;
         public String idFlight;
         public MyFlight myFlight;
+        public int num;
 
         public HolderData(@NonNull View itemView) {
             super(itemView);
@@ -73,6 +75,8 @@ public class MyFlightAdapter extends RecyclerView.Adapter<MyFlightAdapter.Holder
             intentDetailMyFlight.putExtra("TGL_ARRIVAL", myFlight.getTgl_arrival());
             intentDetailMyFlight.putExtra("FROM", myFlight.getFrom());
             intentDetailMyFlight.putExtra("TO", myFlight.getTo());
+            intentDetailMyFlight.putExtra("STATUS", myFlight.getStatus());
+            intentDetailMyFlight.putExtra("NUM", String.valueOf(num));
             v.getContext().startActivity(intentDetailMyFlight);
 //            Intent intent = new Intent(v.getContext(),AddFlightActivity.class);
 //            intent.putExtra("idFlight",idFlight);

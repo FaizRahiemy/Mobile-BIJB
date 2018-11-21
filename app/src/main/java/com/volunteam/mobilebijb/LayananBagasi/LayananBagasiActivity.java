@@ -68,6 +68,8 @@ public class LayananBagasiActivity extends AppCompatActivity implements OnMapRea
     LocationRequest locationRequest;
     boolean udah = false;
 
+    private String kode = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +91,11 @@ public class LayananBagasiActivity extends AppCompatActivity implements OnMapRea
                 "Loading. Please wait...", true);
 
         mdialog.show();
+
+        if (getIntent().hasExtra("kode")){
+            kode = getIntent().getStringExtra("kode");
+            etKodeBookingPenerbangan.setText(kode);
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();

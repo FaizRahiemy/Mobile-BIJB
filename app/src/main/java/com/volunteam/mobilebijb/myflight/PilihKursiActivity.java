@@ -24,12 +24,17 @@ public class PilihKursiActivity extends AppCompatActivity implements PilihKursiA
     private PilihKursiActivityPresenter presenter;
     private Button btnSelesai;
     private String idFlidght = "";
+    private int num = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pilih_kursi);
         presenter = new PilihKursiActivityPresenter(this);
+
+        if (getIntent().hasExtra("num")){
+            num = Integer.parseInt(getIntent().getStringExtra("num"));
+        }
 
         // init views
         defineViews();
@@ -64,7 +69,7 @@ public class PilihKursiActivity extends AppCompatActivity implements PilihKursiA
         swipeContainer.setColorSchemeColors(Color.parseColor("#005c97"),
                 Color.parseColor("#363759"));
 
-        kursiAdapter = new KursiAdapter(presenter.getRowKursiList());
+        kursiAdapter = new KursiAdapter(presenter.getRowKursiList(), num);
         RecyclerView.LayoutManager layoutManager =
                 new LinearLayoutManager(PilihKursiActivity.this, LinearLayoutManager.VERTICAL, false);
         recyclerKursi.setLayoutManager(layoutManager);

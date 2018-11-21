@@ -1,5 +1,6 @@
 package com.volunteam.mobilebijb.myflight;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyFlight {
@@ -19,7 +20,6 @@ public class MyFlight {
     private String status;
     private String airline;
     private String imgAirline;
-
     private List<Penumpang> penumpangList;
 
     public MyFlight(String id, String id_user, String kode, String ktp, String from, String to, String tgl_takeoff, String tgl_departure, String tgl_arrival, String time_departure, String time_arrival, String class_flight, String passenger, String status) {
@@ -42,18 +42,20 @@ public class MyFlight {
     public MyFlight() {
         this.id = "";
         this.id_user = "";
-        this.kode = "";
+        this.kode = "AZERTY";
         this.ktp = "";
-        this.from = "";
-        this.to = "";
-        this.tgl_takeoff = "";
-        this.tgl_departure = "";
-        this.tgl_arrival = "";
-        this.time_departure = "";
-        this.time_arrival = "";
-        this.class_flight = "";
+        this.from = "KJT";
+        this.to = "DPS";
+        this.tgl_takeoff = "21-11-2018";
+        this.tgl_departure = "21-11-2018";
+        this.tgl_arrival = "21-11-2018";
+        this.time_departure = "15:10";
+        this.time_arrival = "16:40";
+        this.class_flight = "Luxury";
         this.passenger = "";
-        this.status = "";
+        this.status = "0";
+        this.penumpangList = new ArrayList<>();
+        this.penumpangList.add(new Penumpang());
     }
 
     public String getId() {
@@ -182,5 +184,13 @@ public class MyFlight {
 
     public void setImgAirline(String imgAirline) {
         this.imgAirline = imgAirline;
+    }
+
+    public List<Penumpang> getPenumpangList() {
+        return penumpangList;
+    }
+
+    public void setPenumpangList(List<Penumpang> penumpangList) {
+        this.penumpangList = penumpangList;
     }
 }

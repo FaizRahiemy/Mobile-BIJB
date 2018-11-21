@@ -17,10 +17,10 @@ public class MyFlightActivityPresenter {
     }
 
     public void getMyFlightData(String id, String token){
-        myFlightList.add(new MyFlight());
-        myFlightList.add(new MyFlight());
+        myFlightList.clear();
         myFlightList.add(new MyFlight());
         view.showFlightsData();
+        view.hideRefresh();
     }
 
     public List<MyFlight> getMyFlightList() {
