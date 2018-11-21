@@ -4,6 +4,7 @@ public class ProductsItem{
 	private String image;
 	private String harga;
 	private String jumlah;
+	private String cartId;
 	private String name;
 	private String description;
 	private String kategori;
@@ -32,6 +33,14 @@ public class ProductsItem{
 
 	public String getJumlah(){
 		return jumlah;
+	}
+
+	public void setCartId(String cartId){
+		this.cartId = cartId;
+	}
+
+	public String getCartId(){
+		return cartId;
 	}
 
 	public void setName(String name){
@@ -81,6 +90,7 @@ public class ProductsItem{
 			"image = '" + image + '\'' + 
 			",harga = '" + harga + '\'' + 
 			",jumlah = '" + jumlah + '\'' + 
+			",cartId = '" + cartId + '\'' + 
 			",name = '" + name + '\'' + 
 			",description = '" + description + '\'' + 
 			",kategori = '" + kategori + '\'' + 

@@ -15,6 +15,8 @@ import com.volunteam.mobilebijb.R;
 import com.volunteam.mobilebijb.Transaksi.adapter.ProductAdapter;
 import com.volunteam.mobilebijb.Transaksi.pojo.Id.ProductsItem;
 import com.volunteam.mobilebijb.config.TinyDB;
+import com.volunteam.mobilebijb.config.api.API;
+import com.volunteam.mobilebijb.config.api.MainAPIHelper;
 import com.volunteam.mobilebijb.merchandise.MerchandisePresenter;
 import com.volunteam.mobilebijb.merchandise.MerchandiseView;
 import com.volunteam.mobilebijb.merchandise.adapter.MerchandiseAdapter;
@@ -34,6 +36,8 @@ public class CartActivity extends AppCompatActivity implements CartView {
     TinyDB tinyDB;
     String token;
     String idUser;
+    String id;
+    ProductAdapter merchandiseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +50,14 @@ public class CartActivity extends AppCompatActivity implements CartView {
         tinyDB = new TinyDB(this);
         idUser = tinyDB.getString("id");
         token = tinyDB.getString("token");
+        id = getIntent().getStringExtra("id");
 
-        merchandisePresenter.getMerchandise(token, idUser);
+        merchandisePresenter.getMerchandise(token, id);
         refresh_layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                merchandisePresenter.getMerchandise(token, idUser);
+            merchandisePresenter.getMerchandise(token, id);
+            merchandiseAdapter.notifyDataSetChanged();
             }
         });
     }
@@ -60,6 +66,11 @@ public class CartActivity extends AppCompatActivity implements CartView {
         toolbar = findViewById(R.id.toolbar);
         refresh_layout = findViewById(R.id.refresh_layout);
         recycler_marchendise = findViewById(R.id.recycler_marchendise);
+    }
+
+    public void getMerchandise(){
+        merchandisePresenter.getMerchandise(token, id);
+        merchandiseAdapter.notifyDataSetChanged();
     }
 
     private void setToolbar(Toolbar toolbar){
@@ -79,7 +90,7 @@ public class CartActivity extends AppCompatActivity implements CartView {
 
     @Override
     public void setMerchandise(List<ProductsItem> merchsList) {
-        ProductAdapter merchandiseAdapter = new ProductAdapter(merchsList, this);
+        merchandiseAdapter = new ProductAdapter(merchsList, this);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false);
         recycler_marchendise.setLayoutManager(layoutManager);
         recycler_marchendise.setItemAnimator(new DefaultItemAnimator());

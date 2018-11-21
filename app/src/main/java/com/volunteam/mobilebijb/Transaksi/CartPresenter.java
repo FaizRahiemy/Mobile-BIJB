@@ -22,11 +22,9 @@ public class CartPresenter {
 
     public void getMerchandise(String token, String id){
         final API apiToken = MainAPIHelper.getClient(token).create(API.class);
-        System.out.println("masuk");
         apiToken.getTransaksiId(MainAPIHelper.key, id).enqueue(new Callback<GetTransaksiIdResponse>() {
             @Override
             public void onResponse(Call<GetTransaksiIdResponse> call, Response<GetTransaksiIdResponse> response) {
-                System.out.println("Status api: " + response.body().getStatus());
                 if (response.body().getStatusCode() == 1){
                     merchList.addAll(response.body().getTransaksi().getProducts());
                     merchandiseView.setMerchandise(merchList);
