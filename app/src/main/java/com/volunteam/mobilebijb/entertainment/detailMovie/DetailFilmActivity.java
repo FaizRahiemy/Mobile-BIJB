@@ -74,7 +74,7 @@ public class DetailFilmActivity extends AppCompatActivity implements DetailMovie
                 .load(image)
                 .into(img_film);
         txt_title_film.setText(title);
-        txt_release_date_film.setText(releaseDate);
+        txt_release_date_film.setText("Release date: "+releaseDate);
         txt_deskripsi_film.setText(description);
     }
 
