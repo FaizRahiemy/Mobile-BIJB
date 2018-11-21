@@ -26,6 +26,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -180,8 +181,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         nav_view.setNavigationItemSelectedListener(this);
         myMenu = nav_view.getMenu();
         txProfile = (TextView)findViewById(R.id.tx_profile);
+
+        // header view
         View headerView = nav_view.getHeaderView(0);
         ImageView imgProfile = (ImageView) headerView.findViewById(R.id.img_profile);
+        LinearLayout btn_wallet = headerView.findViewById(R.id.btn_wallet);
+        RelativeLayout layout_tx_profile = headerView.findViewById(R.id.layout_tx_profile);
         txProfile = (TextView) headerView.findViewById(R.id.tx_profile);
         // TODO set name according to login user
         txProfile.setText("Login");
@@ -193,13 +198,25 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 myMenu.findItem(R.id.logout).setVisible(false);
                 myMenu.findItem(R.id.baggage_track).setVisible(false);
                 myMenu.findItem(R.id.my_flight).setVisible(false);
+
+                imgProfile.setVisibility(View.GONE);
+                btn_wallet.setVisibility(View.GONE);
+                layout_tx_profile.setBackground(getResources().getDrawable(R.drawable.rect_rounded_white_outline));
+                RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                layoutParams.setMargins(80,20,80,20);
+                txProfile.setLayoutParams(layoutParams);
             }else{
                 myMenu.findItem(R.id.logout).setVisible(true);
+                imgProfile.setVisibility(View.VISIBLE);
+                btn_wallet.setVisibility(View.VISIBLE);
             }
         }catch(Exception e){
             myMenu.findItem(R.id.logout).setVisible(false);
             myMenu.findItem(R.id.baggage_track).setVisible(false);
             myMenu.findItem(R.id.my_flight).setVisible(false);
+
+            imgProfile.setVisibility(View.GONE);
+            btn_wallet.setVisibility(View.GONE);
         }
     }
 

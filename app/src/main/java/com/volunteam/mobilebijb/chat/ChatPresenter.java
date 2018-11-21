@@ -1,6 +1,7 @@
 package com.volunteam.mobilebijb.chat;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -20,39 +21,93 @@ import java.util.TimeZone;
 
 public class ChatPresenter {
     private ChatView chatView;
-    private final DatabaseReference firebaseMessageRef = FirebaseDatabase.getInstance().getReference().child("Messages");
+    private final DatabaseReference firebaseMessageRef = FirebaseDatabase.getInstance().getReference();
     private final List<Chat> chatList = new ArrayList<>();
+
+    private final String idTemp = firebaseMessageRef.push().getKey();
 
     public ChatPresenter(ChatView chatView) {
         this.chatView = chatView;
     }
 
-    public void getChat(){
-        chatList.clear();
-        firebaseMessageRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot snap: dataSnapshot.getChildren()){
-                    Chat chat = snap.getValue(Chat.class);
-                    if (!chat.getTime().equals("today")){
-                        chat.setTime(timeConverter(chat.getTime()));
-                        chatList.add(chat);
+    public void getChat(final String id){
+        if (id.equals("public")){
+            chatList.clear();
+            firebaseMessageRef.child(idTemp).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (!dataSnapshot.exists()){
+                        sendChatCustomerService(setMessageCustomerServiceLogin(), idTemp);
+                        getChat(idTemp);
                     }else {
-                        chatList.add(chat);
+                        for(DataSnapshot snap: dataSnapshot.getChildren()){
+                            Chat chat = snap.getValue(Chat.class);
+                            chat.setTime(timeConverter(chat.getTime()));
+                            chatList.add(chat);
+                        }
+                        chatView.setChat(chatList);
                     }
                 }
-                chatView.setChat(chatList);
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                chatView.onCancelGetMessage(databaseError.getMessage());
-            }
-        });
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    chatView.onCancelGetMessage(databaseError.getMessage());
+                }
+            });
+        }else {
+            chatList.clear();
+            firebaseMessageRef.child(id).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (!dataSnapshot.exists()){
+                        sendChatCustomerService(setMessageCustomerServiceFirst(), id);
+                        getChat(id);
+                    }else {
+                        for(DataSnapshot snap: dataSnapshot.getChildren()){
+                            Chat chat = snap.getValue(Chat.class);
+                            chat.setTime(timeConverter(chat.getTime()));
+                            chatList.add(chat);
+                        }
+                        chatView.setChat(chatList);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    chatView.onCancelGetMessage(databaseError.getMessage());
+                }
+            });
+        }
     }
 
-    public void sendChat(Chat chat){
-        firebaseMessageRef.push().setValue(chat).addOnCompleteListener(new OnCompleteListener<Void>() {
+    public void sendChat(Chat chat, final String id){
+        if (id.equals("public")){
+            firebaseMessageRef.child(idTemp).push().setValue(chat).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()){
+                        sendChatCustomerService(setMessageCustomerServiceLogin(), idTemp);
+                    }else {
+                        chatView.onFailedSendmessage("pesan gagal dikirim");
+                    }
+                }
+            });
+        }else {
+            firebaseMessageRef.child(id).push().setValue(chat).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()){
+                        sendChatCustomerService(setMessageCustomerService(), id);
+                    }else {
+                        chatView.onFailedSendmessage("pesan gagal dikirim");
+                    }
+                }
+            });
+        }
+    }
+
+    private void sendChatCustomerService(Chat chat, String id){
+        firebaseMessageRef.child(id).push().setValue(chat).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
@@ -62,6 +117,33 @@ public class ChatPresenter {
                 }
             }
         });
+    }
+
+    private Chat setMessageCustomerService(){
+        Chat chat = new Chat();
+        chat.setTime(getTimeString());
+        chat.setImage("http://www.rff.org/files/profile_pictures/Blonz_5x7.jpg");
+        chat.setName("Customer Service");
+        chat.setMessage("Terimakasih telah menghubungi Customer Service BIJB. Akan kami berikan balasan secepatnya.");
+        return chat;
+    }
+
+    private Chat setMessageCustomerServiceFirst(){
+        Chat chat = new Chat();
+        chat.setTime(getTimeString());
+        chat.setImage("http://www.rff.org/files/profile_pictures/Blonz_5x7.jpg");
+        chat.setName("Customer Service");
+        chat.setMessage("Selamat datang di BIJB Mobile. Apakah ada yang bisa saya bantu?");
+        return chat;
+    }
+
+    private Chat setMessageCustomerServiceLogin(){
+        Chat chat = new Chat();
+        chat.setTime(getTimeString());
+        chat.setImage("http://www.rff.org/files/profile_pictures/Blonz_5x7.jpg");
+        chat.setName("Customer Service");
+        chat.setMessage("Mohon maaf, anda harus login terlebih dahulu.");
+        return chat;
     }
 
     private String timeConverter(String timeSent){
@@ -120,5 +202,14 @@ public class ChatPresenter {
         /*SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");*/
         /*String strDate = df.format(date);*/
         return date;
+    }
+
+    private String getTimeString() {
+        Calendar c = Calendar.getInstance();
+        c.setTimeZone(TimeZone.getTimeZone("GMT+07:00"));
+        Date date = c.getTime();
+        /*SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");*/
+        String strDate = String.valueOf(date);
+        return strDate;
     }
 }

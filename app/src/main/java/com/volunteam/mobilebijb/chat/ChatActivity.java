@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.volunteam.mobilebijb.R;
 import com.volunteam.mobilebijb.chat.adapter.ChatAdapter;
 import com.volunteam.mobilebijb.chat.model.Chat;
+import com.volunteam.mobilebijb.config.TinyDB;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -43,11 +45,11 @@ public class ChatActivity extends AppCompatActivity implements ChatView{
         setToolbar(toolbar);
         changeButtonSendBackground(edit_message);
         showProgressDialog();
-        chatPresenter.getChat();
+        chatPresenter.getChat(getIdUser());
         refresh_layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                chatPresenter.getChat();
+                chatPresenter.getChat(getIdUser());
             }
         });
     }
@@ -122,7 +124,7 @@ public class ChatActivity extends AppCompatActivity implements ChatView{
 
     private void sendMessageToFirebase(){
         Chat chat = new Chat(getTime(), edit_message.getText().toString(), "http://www.rff.org/files/profile_pictures/Blonz_5x7.jpg","user");
-        chatPresenter.sendChat(chat);
+        chatPresenter.sendChat(chat, getIdUser());
     }
 
     private void hideSoftKeyboard() {
@@ -168,9 +170,10 @@ public class ChatActivity extends AppCompatActivity implements ChatView{
 
     @Override
     public void onSuccessSendmessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        /*Toast.makeText(this, message, Toast.LENGTH_SHORT).show();*/
+        Log.d("ChatActivity.onSuccessSendMessage", message);
         showProgressDialog();
-        chatPresenter.getChat();
+        chatPresenter.getChat(getIdUser());
         hideSoftKeyboard();
         edit_message.setText("");
     }
@@ -183,5 +186,24 @@ public class ChatActivity extends AppCompatActivity implements ChatView{
     @Override
     public void onCancelGetMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private String getIdUser(){
+        try {
+            System.out.println("ChatActivity.getIdUser");
+            TinyDB tinyDB = new TinyDB(this);
+            Log.d("ChatActivity.getIdUser", tinyDB.getString("id"));
+            System.out.println("ChatActivity.getIdUser: "+ tinyDB.getString("id"));
+            if (tinyDB.getString("id").equals("")){
+                Log.d("ChatActivity.getIdUser", "public");
+                return "public";
+            }else {
+                return tinyDB.getString("id");
+            }
+        }catch (Exception e){
+            Log.d("ChatActivity.getIdUser", "public");
+            System.out.println("ChatActivity.getIdUser: public");
+            return "public";
+        }
     }
 }
