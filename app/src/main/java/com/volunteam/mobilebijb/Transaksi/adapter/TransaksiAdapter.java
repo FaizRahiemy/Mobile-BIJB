@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.volunteam.mobilebijb.R;
 import com.volunteam.mobilebijb.Transaksi.CartActivity;
-import com.volunteam.mobilebijb.Transaksi.pojo.TransaksiItem;
+import com.volunteam.mobilebijb.Transaksi.pojo.User.TransaksiItem;
 
 import java.util.List;
 
@@ -34,9 +34,9 @@ public class TransaksiAdapter extends RecyclerView.Adapter<TransaksiAdapter.Hold
     public void onBindViewHolder(@NonNull HolderData holderData, int i) {
         TransaksiItem transaksi = listTransaksi.get(i);
         holderData.id = transaksi.getId();
-        holderData.txNama.setText("Transaksi " + transaksi.getId());
+        holderData.txNama.setText("#" + transaksi.getId());
         holderData.txTgl.setText(transaksi.getDate());
-        holderData.txJumlah.setText(transaksi.getProducts().size() + " Jenis Barang");
+        holderData.txJumlah.setText(transaksi.getJumlah() + " Barang");
         if (transaksi.getStatus().equals("0")){
             holderData.txStatus2.setVisibility(View.INVISIBLE);
             holderData.txStatus3.setVisibility(View.INVISIBLE);

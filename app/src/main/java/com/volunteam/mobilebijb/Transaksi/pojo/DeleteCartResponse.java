@@ -1,19 +1,8 @@
 package com.volunteam.mobilebijb.Transaksi.pojo;
 
-import java.util.List;
-
-public class GetTransaksiResponse{
-	private List<TransaksiItem> transaksi;
+public class DeleteCartResponse{
 	private int statusCode;
 	private String status;
-
-	public void setTransaksi(List<TransaksiItem> transaksi){
-		this.transaksi = transaksi;
-	}
-
-	public List<TransaksiItem> getTransaksi(){
-		return transaksi;
-	}
 
 	public void setStatusCode(int statusCode){
 		this.statusCode = statusCode;
@@ -34,9 +23,8 @@ public class GetTransaksiResponse{
 	@Override
  	public String toString(){
 		return 
-			"GetTransaksiResponse{" + 
-			"transaksi = '" + transaksi + '\'' + 
-			",statusCode = '" + statusCode + '\'' + 
+			"DeleteCartResponse{" + 
+			"statusCode = '" + statusCode + '\'' + 
 			",status = '" + status + '\'' + 
 			"}";
 		}

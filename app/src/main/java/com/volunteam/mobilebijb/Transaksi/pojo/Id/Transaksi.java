@@ -1,8 +1,8 @@
-package com.volunteam.mobilebijb.Transaksi.pojo;
+package com.volunteam.mobilebijb.Transaksi.pojo.Id;
 
 import java.util.List;
 
-public class TransaksiItem{
+public class Transaksi{
 	private String date;
 	private String id;
 	private String user;
@@ -52,7 +52,7 @@ public class TransaksiItem{
 	@Override
  	public String toString(){
 		return 
-			"TransaksiItem{" + 
+			"Transaksi{" + 
 			"date = '" + date + '\'' + 
 			",id = '" + id + '\'' + 
 			",user = '" + user + '\'' + 

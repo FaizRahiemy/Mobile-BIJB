@@ -15,8 +15,12 @@ import com.volunteam.mobilebijb.R;
 import com.volunteam.mobilebijb.detailMerchandise.DetailMerchandiseActivity;
 import com.volunteam.mobilebijb.merchandise.pojo.MerchsItem;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MerchandiseAdapter extends RecyclerView.Adapter<MerchandiseAdapter.ViewHolder> {
     List<MerchsItem> merchsList = new ArrayList<>();
@@ -58,8 +62,13 @@ public class MerchandiseAdapter extends RecyclerView.Adapter<MerchandiseAdapter.
             itemView.setOnClickListener(this);
         }
         public void setMerchandise(MerchsItem merchItem){
+            DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+            DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
+            symbols.setGroupingSeparator('.');
+            formatter.setDecimalFormatSymbols(symbols);
+
             txt_nama_produk.setText(merchItem.getName());
-            txt_harga_produk.setText(merchItem.getHarga());
+            txt_harga_produk.setText("Rp " + formatter.format(Float.valueOf(merchItem.getHarga())));
             if (merchItem.getImage().isEmpty()){
                 Picasso.with(itemView.getContext())
                         .load(R.color.colorPrimaryDark)
