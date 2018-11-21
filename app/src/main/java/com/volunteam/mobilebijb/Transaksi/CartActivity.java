@@ -12,6 +12,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.volunteam.mobilebijb.R;
+import com.volunteam.mobilebijb.Transaksi.adapter.ProductAdapter;
+import com.volunteam.mobilebijb.Transaksi.pojo.Id.ProductsItem;
+import com.volunteam.mobilebijb.config.TinyDB;
 import com.volunteam.mobilebijb.merchandise.MerchandisePresenter;
 import com.volunteam.mobilebijb.merchandise.MerchandiseView;
 import com.volunteam.mobilebijb.merchandise.adapter.MerchandiseAdapter;
@@ -19,7 +22,7 @@ import com.volunteam.mobilebijb.merchandise.pojo.MerchsItem;
 
 import java.util.List;
 
-public class CartActivity extends AppCompatActivity implements MerchandiseView {
+public class CartActivity extends AppCompatActivity implements CartView {
 
     //merchandise
     private Toolbar toolbar;
@@ -27,7 +30,10 @@ public class CartActivity extends AppCompatActivity implements MerchandiseView {
     private RecyclerView recycler_marchendise;
 
     //presenter
-    MerchandisePresenter merchandisePresenter = new MerchandisePresenter(this);
+    CartPresenter merchandisePresenter = new CartPresenter(this);
+    TinyDB tinyDB;
+    String token;
+    String idUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +42,16 @@ public class CartActivity extends AppCompatActivity implements MerchandiseView {
 
         defineViews();
         setToolbar(toolbar);
-        merchandisePresenter.getMerchandise();
+
+        tinyDB = new TinyDB(this);
+        idUser = tinyDB.getString("id");
+        token = tinyDB.getString("token");
+
+        merchandisePresenter.getMerchandise(token, idUser);
         refresh_layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-            merchandisePresenter.getMerchandise();
+                merchandisePresenter.getMerchandise(token, idUser);
             }
         });
     }
@@ -67,8 +78,8 @@ public class CartActivity extends AppCompatActivity implements MerchandiseView {
     }
 
     @Override
-    public void setMerchandise(List<MerchsItem> merchsList) {
-        MerchandiseAdapter merchandiseAdapter = new MerchandiseAdapter(merchsList, this);
+    public void setMerchandise(List<ProductsItem> merchsList) {
+        ProductAdapter merchandiseAdapter = new ProductAdapter(merchsList, this);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false);
         recycler_marchendise.setLayoutManager(layoutManager);
         recycler_marchendise.setItemAnimator(new DefaultItemAnimator());

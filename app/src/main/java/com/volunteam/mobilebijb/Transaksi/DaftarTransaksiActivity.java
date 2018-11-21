@@ -2,7 +2,6 @@ package com.volunteam.mobilebijb.Transaksi;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -15,21 +14,20 @@ import android.widget.Toast;
 
 import com.volunteam.mobilebijb.R;
 import com.volunteam.mobilebijb.Transaksi.adapter.TransaksiAdapter;
-import com.volunteam.mobilebijb.Transaksi.pojo.GetTransaksiResponse;
-import com.volunteam.mobilebijb.Transaksi.pojo.TambahCartResponse;
-import com.volunteam.mobilebijb.Transaksi.pojo.TransaksiItem;
+import com.volunteam.mobilebijb.Transaksi.pojo.User.GetTransaksiUserResponse;
+import com.volunteam.mobilebijb.Transaksi.pojo.User.TransaksiItem;
 import com.volunteam.mobilebijb.config.TinyDB;
 import com.volunteam.mobilebijb.config.api.API;
 import com.volunteam.mobilebijb.config.api.MainAPIHelper;
-import com.volunteam.mobilebijb.detailMerchandise.DetailMerchandiseActivity;
-import com.volunteam.mobilebijb.detailMerchandise.pojo.Merchs;
 import com.volunteam.mobilebijb.login.LoginActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.internal.Internal;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -88,17 +86,28 @@ public class DaftarTransaksiActivity extends AppCompatActivity {
                 Intent intent = new Intent(DaftarTransaksiActivity.this, LoginActivity.class);
                 startActivity(intent);
             }else{
-                apiToken.getTransaksiUser(MainAPIHelper.key, idUser).enqueue(new Callback<GetTransaksiResponse>() {
+                apiToken.getTransaksiUser(MainAPIHelper.key, idUser).enqueue(new Callback<GetTransaksiUserResponse>() {
                     @Override
-                    public void onResponse(Call<GetTransaksiResponse> call, Response<GetTransaksiResponse> response) {
+                    public void onResponse(Call<GetTransaksiUserResponse> call, Response<GetTransaksiUserResponse> response) {
                         if (response.body().getStatusCode() == 1){
-                            listTransaksi.addAll(response.body().getTransaksi());
+                            List<TransaksiItem> transs = response.body().getTransaksi();
+                            for (int i=0; i < transs.size(); i++){
+                                int jumlah = 0;
+                                for (int j=0; j < transs.get(i).getProducts().size(); j++){
+                                    jumlah += Integer.valueOf(transs.get(i).getProducts().get(j).getJumlah());
+                                }
+                                transs.get(i).setJumlah(jumlah);
+                            }
+                            listTransaksi.addAll(transs);
                             transaksiAdapter.notifyDataSetChanged();
+                            if (listTransaksi.size() > 0){
+                                layoutEmptyTransaksi.setVisibility(View.GONE);
+                            }
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<GetTransaksiResponse> call, Throwable t) {
+                    public void onFailure(Call<GetTransaksiUserResponse> call, Throwable t) {
                         Toast.makeText(DaftarTransaksiActivity.this, "Periksa koneksi internet!", Toast.LENGTH_SHORT).show();
                     }
                 });

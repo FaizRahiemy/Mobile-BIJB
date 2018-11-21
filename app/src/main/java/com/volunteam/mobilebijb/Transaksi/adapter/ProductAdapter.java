@@ -1,4 +1,4 @@
-package com.volunteam.mobilebijb.merchandise.adapter;
+package com.volunteam.mobilebijb.Transaksi.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.volunteam.mobilebijb.R;
+import com.volunteam.mobilebijb.Transaksi.pojo.Id.ProductsItem;
 import com.volunteam.mobilebijb.detailMerchandise.DetailMerchandiseActivity;
-import com.volunteam.mobilebijb.merchandise.pojo.MerchsItem;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -22,23 +22,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class MerchandiseAdapter extends RecyclerView.Adapter<MerchandiseAdapter.ViewHolder> {
-    List<MerchsItem> merchsList = new ArrayList<>();
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
+    List<ProductsItem> merchsList = new ArrayList<>();
     Context context;
 
-    public MerchandiseAdapter(List<MerchsItem> merchsList, Context context) {
+    public ProductAdapter(List<ProductsItem> merchsList, Context context) {
         this.merchsList = merchsList;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_merchandise,viewGroup,false));
+    public ProductAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new ProductAdapter.ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_merchandise,viewGroup,false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ProductAdapter.ViewHolder viewHolder, int i) {
         viewHolder.setMerchandise(merchsList.get(i));
     }
 
@@ -52,7 +52,7 @@ public class MerchandiseAdapter extends RecyclerView.Adapter<MerchandiseAdapter.
         private TextView txt_nama_produk;
         private TextView txt_harga_produk;
 
-        private MerchsItem merchItem;
+        private ProductsItem merchItem;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -61,7 +61,8 @@ public class MerchandiseAdapter extends RecyclerView.Adapter<MerchandiseAdapter.
             txt_harga_produk = itemView.findViewById(R.id.txt_harga_produk);
             itemView.setOnClickListener(this);
         }
-        public void setMerchandise(MerchsItem merchItem){
+
+        public void setMerchandise(ProductsItem merchItem){
             DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
             DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
             symbols.setGroupingSeparator('.');

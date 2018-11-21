@@ -1,17 +1,15 @@
-package com.volunteam.mobilebijb.Transaksi.pojo;
+package com.volunteam.mobilebijb.Transaksi.pojo.Id;
 
-import java.util.List;
-
-public class GetTransaksiResponse{
-	private List<TransaksiItem> transaksi;
+public class GetTransaksiIdResponse{
+	private Transaksi transaksi;
 	private int statusCode;
 	private String status;
 
-	public void setTransaksi(List<TransaksiItem> transaksi){
+	public void setTransaksi(Transaksi transaksi){
 		this.transaksi = transaksi;
 	}
 
-	public List<TransaksiItem> getTransaksi(){
+	public Transaksi getTransaksi(){
 		return transaksi;
 	}
 
@@ -34,7 +32,7 @@ public class GetTransaksiResponse{
 	@Override
  	public String toString(){
 		return 
-			"GetTransaksiResponse{" + 
+			"GetTransaksiIdResponse{" + 
 			"transaksi = '" + transaksi + '\'' + 
 			",statusCode = '" + statusCode + '\'' + 
 			",status = '" + status + '\'' + 

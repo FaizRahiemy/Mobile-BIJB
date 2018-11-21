@@ -2,8 +2,9 @@ package com.volunteam.mobilebijb.config.api;
 
 import com.volunteam.mobilebijb.AirportBike.pojo.GetBikeResponse;
 import com.volunteam.mobilebijb.BookTicket.model.GetBandaraResponse;
-import com.volunteam.mobilebijb.Transaksi.pojo.GetTransaksiResponse;
+import com.volunteam.mobilebijb.Transaksi.pojo.Id.GetTransaksiIdResponse;
 import com.volunteam.mobilebijb.Transaksi.pojo.TambahCartResponse;
+import com.volunteam.mobilebijb.Transaksi.pojo.User.GetTransaksiUserResponse;
 import com.volunteam.mobilebijb.Travelling.PublicTransport.pojo.Public.PublicTransportResponse;
 import com.volunteam.mobilebijb.Travelling.PublicTransport.pojo.detail.TransportDetailResponse;
 import com.volunteam.mobilebijb.detailMerchandise.pojo.GetMerchandiseDetailResponse;
@@ -91,12 +92,12 @@ public interface API {
 
     @FormUrlEncoded
     @POST("getTransaksiUser.php")
-    Call<GetTransaksiResponse> getTransaksiUser(@Query("key") String key,
-                                                @Field("user") String user);
+    Call<GetTransaksiUserResponse> getTransaksiUser(@Query("key") String key,
+                                                    @Field("user") String user);
 
     @FormUrlEncoded
     @POST("getTransaksiId.php")
-    Call<GetTransaksiResponse> getTransaksiId(@Query("key") String key,
+    Call<GetTransaksiIdResponse> getTransaksiId(@Query("key") String key,
                                                 @Field("id") String id);
 
     @FormUrlEncoded
@@ -113,20 +114,6 @@ public interface API {
     @FormUrlEncoded
     @POST("showUser.php")
     Call<LoginResponse> showUser(@Field("id") String id);
-
-//    @GET
-//    public Call<ResponseTrailerMovieApi> getDetailMovie(@Url String url, @Query("api_key") String api_key);
-//    @GET("top-headlines")
-//    public Call<ResponseNewsApi> getHeadlines(@Query("country") String country, @Query("apiKey") String apiKey);
-//
-//    @GET("movie/popular")
-//    public Call<ResponsePopularMovieApi> getPopularMovies(@Query("api_key") String api_key, @Query("language") String language, @Query("page") String page);
-//
-//    @GET("movie/now_playing")
-//    public Call<ResponseNowPlayingApi> getNowPlayingMovies(@Query("api_key") String api_key, @Query("language") String language, @Query("page") String page);
-//
-//    @GET
-//    public Call<ResponseTrailerMovieApi> getDetailMovie(@Url String url, @Query("api_key") String api_key);
 
     @FormUrlEncoded
     @POST("updateUser.php")
